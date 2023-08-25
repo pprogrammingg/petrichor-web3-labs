@@ -1,0 +1,39 @@
+  .taskCard {
+    width: 100px;
+    height: 161.8px; /* Golden ratio */
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .taskText {
+    color: black;
+  }
+  
+  .completeButton {
+    width: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    color: white;
+    background-color: mediumblue;
+    cursor: pointer;
+  }
+  
+  .completedButton {
+    width: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    color: white;
+    background-color: grey;
+    cursor: not-allowed;
+  }
+  

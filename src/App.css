@@ -1,0 +1,9 @@
+body, html {
+  box-sizing: border-box;
+  font-family:'Montserrat','Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  overflow-y: auto; /* Enable vertical scrolling only if content overflows */
+}
