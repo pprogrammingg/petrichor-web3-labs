@@ -20,7 +20,8 @@
 
 === Membership page
 [x] in App.tsx will have a new Member page
-[] add Connect button, connect to Persona and at least 1 account, display in text the balance of user in that account and badges available
+[] add Connect button, connect to Persona and at least 1 account
+[] display console log the balance of user in that account and badges available
 
 [] When user clicks member they will be taken to member page where a Member component is rendered. Member component will take the following MemberProps:
 {
@@ -211,7 +212,15 @@ and second one as:
 [] clicking task and seeing updated balance change
 [] changing the account logged and thus displaying different balances
 [] log out from a single account and log in to another (maybe makes no sense?)
+
 == Radix Wallet Styles
 [x] way to set cursor, margin and padding
 [x] Proper way to config --> see https://github.com/radixdlt/radix-dapp-toolkit/tree/39cd37c345fc1ce1c7d4459b4e2624f93ff8ad91
 [x] Rounded corners
+
+== Warnings and Linting
+[] Warning: reactive-element.ts:76 Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.
+issueWarning @ reactive-element.ts:76
+(anonymous) @ reactive-element.ts:81
+
+[] Warning: css-tag.ts:80 @import rules are not allowed here. See https://github.com/WICG/construct-stylesheets/issues/119#issuecomment-588352418.
