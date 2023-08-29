@@ -10,12 +10,15 @@ function Member() {
   result
     .map((response) => {
       console.log('Entity details:', response);
+      // cannot access children of response and throws error, ideally wanted response.fungible_resources.item (some additional filtering)
+      // console.log("Fungible Token REW balance is " + response.fungible_resources.items); 
+     
     })
     .mapErr((error) => {
       console.error('Error:', error);
     });
 
-  console.log("result is " + response.fungible_resources);
+// what I need 
   return (
     <>
         <h1>Welcome Member!</h1>
