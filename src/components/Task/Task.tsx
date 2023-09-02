@@ -13,7 +13,7 @@ function Task({ taskText }: TaskProps) {
     if (!completed) {
       console.log("task text is: " + taskText)
       console.log("Reward Amount is: " + simpleTaskReward);
-      setCompleted(true);taskText
+      setCompleted(true);
     }
   };
 
