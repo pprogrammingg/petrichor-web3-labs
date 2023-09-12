@@ -29,8 +29,8 @@
 [x] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
 
 [] adapt to Gumball machine example [Gumball Example](https://github.com/radixdlt/gumball-club/blob/main/dapp/src/app/hooks/useAccounts.ts)
-   [] radix/transaction-manifests.ts -> use config membercard reource address
-   []
+   [] radix/transaction-manifests.ts
+   [] transformers/addTokens.ts (partially understood)
    []
    []
 [] Move the whole App.tsx
