@@ -1,13 +1,18 @@
 import './App.css'
+import { useEffect, useState } from 'react'
+import {
+  DataRequestBuilder,
+  RadixDappToolkit,
+  createLogger,
+} from '@radixdlt/radix-dapp-toolkit'
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
+import { RadixProvider } from './radix/RadixProvider';
+import { config } from './config'
 import TaskList from './components/TaskList/TaskList';
 import Member from './components/membership/Member';
 import Home from './components/home/Home';
 import ErrorPage from './components/errorPage/ErrorPage';
 import RootLayout from './components/rootLayout/RootLayout';
-import { getEntityDetails} from './components/rdt/helpers/entity-details-from-gateway';
-import { RdtProvider } from './components/rdt/RdtProvider';
-import { rdt } from './components/rdt/rdt';
 
 declare global {
   namespace JSX {
@@ -30,32 +35,30 @@ const router = createBrowserRouter(
   )
 );
 
+export default function App() {
+  const [state, setState] = useState<RadixDappToolkit | undefined>()
 
+  // Initialize Radix Dapp Toolkit in the client
+  useEffect(() => {
+    const radixDappToolkit = RadixDappToolkit({
+      networkId: config.network.networkId,
+      dAppDefinitionAddress: config.dAppDefinitionAddress,
+      logger: createLogger(2),
+    })
 
-// async function testAsync() {
-//   const entriesPromise = await randomApi("https://api.publicapis.org/entries");
-//   const employeesPromise = await randomApi("https://dummy.restapiexample.com/api/v1/employees");
+    radixDappToolkit.walletApi.setRequestData(
+      DataRequestBuilder.accounts().atLeast(1),
+      DataRequestBuilder.personaData().fullName()
+    )
 
-//   const [entries, employees] = await Promise.all([entriesPromise, employeesPromise]);
+    setState(radixDappToolkit)
+  }, [])
 
-//   console.log(entries);
-//   console.log(employees);
-// }
-
-
-
-function App() {
-  // getEntityDetails();
-
-  // testAsync() ;
+  if (!state) return null
 
   return (
-    <>
-      <RdtProvider value={rdt}>      
-        <RouterProvider router={router}/>
-      </RdtProvider>
-    </>
+    <RadixProvider value={state}>
+      <RouterProvider router={router}/>
+    </RadixProvider>
   )
 }
-
-export default App

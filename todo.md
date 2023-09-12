@@ -1,7 +1,3 @@
-=== General React/TypeScript RnD
-[] Component lifetime and hooks
-[x] basic ways to handle async in React
-
 
 === Main App Style
 
@@ -30,8 +26,14 @@
 [x] Populate with NFT data
 [x] Understand wallet data (means persona, identities, proofs, accounts) changes vs balance changes (FT and NFT detaisl form gateway)
 [x] Understand how examples for how observable and gateway APIs are used
-[] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
-[] Move this perhaps for the whole App.tsx
+[x] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
+
+[] adapt to Gumball machine example [Gumball Example](https://github.com/radixdlt/gumball-club/blob/main/dapp/src/app/hooks/useAccounts.ts)
+   [] radix/transaction-manifests.ts -> use config membercard reource address
+   []
+   []
+   []
+[] Move the whole App.tsx
 [] make sure rdt context carries balances and is available to all modules
 [] UI: get NFT internal data for all NFTs available
 [] handle network errors gracefully
