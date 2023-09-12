@@ -118,10 +118,11 @@ export const transformNonFungibleTokens = async (
   ): Promise<StateNonFungibleDetailsResponseItem[]> =>
     stateApi.getNonFungibleData(address, ids)
 
+  // TODO: make sure return type added by me works "Promise<string[]"
   const getNonFungibleIds = async (
     accountAddress: string,
     nonFungibleResource: NonFungibleResourcesCollectionItemVaultAggregated
-  ) : Promise<String[]> => {
+  ) : Promise<string[]> => {
     const ids: string[] = []
 
     for (const vault of nonFungibleResource.vaults.items) {

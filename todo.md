@@ -29,10 +29,12 @@
 [x] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
 
 [] adapt to Gumball machine example [Gumball Example](https://github.com/radixdlt/gumball-club/blob/main/dapp/src/app/hooks/useAccounts.ts)
-   [] radix/transaction-manifests.ts
-   [] transformers/addTokens.ts (partially understood)
-   []
-   []
+   [] radix/transaction-manifests.ts (pending testing)
+   [] transformers/addTokens.ts (pending testing)
+   [] hooks and helpers (pending testing)
+   [] header and alerts
+   [] footer
+   
 [] Move the whole App.tsx
 [] make sure rdt context carries balances and is available to all modules
 [] UI: get NFT internal data for all NFTs available
