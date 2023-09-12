@@ -33,6 +33,9 @@ export const transformFungibleTokens = async (
   fungibles: FungibleResourcesVaultCollection,
   stateApi: State
 ): Promise<Record<string, FungibleResource>> => {
+
+  console.log("fired transformFungibleTokens");
+  
   if (fungibles.items.length === 0) {
     return {}
   }

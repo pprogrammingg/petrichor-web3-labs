@@ -23,6 +23,7 @@ export const TransactionManifests = ({
     reason: string,
     memberCard: NonFungibleResource
   ): string => {
+    console.log(`Issuing reward amount: ${amount}", for reason: ${reason}`);
     return  `
           CALL_METHOD
               Address("${accountAddress}")

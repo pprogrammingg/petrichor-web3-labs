@@ -14,6 +14,14 @@ export type AccountWithTokens = Account &
     nonFungibleTokens: Record<string, NonFungibleResource[]>
   }
 
+/**
+ * function returns a callback that processes an array of accounts. For each account, 
+ * it fetches aggregated data, transforms fungible tokens, and then transforms non-fungible tokens. 
+ * The result is an array of objects, each representing an account with its associated fungible 
+ * and non-fungible tokens. 
+ * @param stateApi
+ * @returns 
+ */
 const useWithTokens = (stateApi: State) => {
   return useCallback(
     (accounts: Account[]) =>
@@ -47,7 +55,8 @@ const useWithTokens = (stateApi: State) => {
 }
 
 export const useAccounts = () => {
-  const dAppToolkit = useDappToolkit()
+  console.log("here in useAccounts.ts");
+  const dAppToolkit = useDappToolkit();
   const [state, setState] = useState<{
     accounts: AccountWithTokens[]
     status: 'pending' | 'success' | 'error'
@@ -55,6 +64,9 @@ export const useAccounts = () => {
   }>({ accounts: [], status: 'pending', hasLoaded: false })
 
   const withTokens = useWithTokens(dAppToolkit.gatewayApi.state)
+
+  console.log("with tokens is giving");
+  console.log(JSON.stringify(withTokens, null, 2));
 
   useEffect(() => {
     const subscription = dAppToolkit.walletApi.walletData$
