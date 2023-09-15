@@ -15,19 +15,19 @@ export type AccountWithTokens = Account &
   }
 
 /**
- * function returns a callback that processes an array of accounts. For each account, 
- * it fetches aggregated data, transforms fungible tokens, and then transforms non-fungible tokens. 
- * The result is an array of objects, each representing an account with its associated fungible 
- * and non-fungible tokens. 
+ * function returns a callback that processes an array of accounts. For each account,
+ * it fetches aggregated data, transforms fungible tokens, and then transforms non-fungible tokens.
+ * The result is an array of objects, each representing an account with its associated fungible
+ * and non-fungible tokens.
  * @param stateApi
- * @returns 
+ * @returns
  */
 const useWithTokens = (stateApi: State) => {
   return useCallback(
     (accounts: Account[]) =>
       stateApi
         .getEntityDetailsVaultAggregated(
-          accounts.map((account) => account.address)
+          accounts.map((account) => account.address),
         )
         .then((data) =>
           Promise.all(
@@ -41,22 +41,21 @@ const useWithTokens = (stateApi: State) => {
                   transformNonFungibleTokens(
                     item.non_fungible_resources,
                     accounts[index].address,
-                    stateApi
+                    stateApi,
                   ).then((nonFungibleTokens) => ({
                     ...values,
                     nonFungibleTokens,
-                  }))
-                )
-            )
-          )
+                  })),
+                ),
+            ),
+          ),
         ),
-    [stateApi]
+    [stateApi],
   )
 }
 
 export const useAccounts = () => {
-  console.log("here in useAccounts.ts");
-  const dAppToolkit = useDappToolkit();
+  const dAppToolkit = useDappToolkit()
   const [state, setState] = useState<{
     accounts: AccountWithTokens[]
     status: 'pending' | 'success' | 'error'
@@ -64,9 +63,6 @@ export const useAccounts = () => {
   }>({ accounts: [], status: 'pending', hasLoaded: false })
 
   const withTokens = useWithTokens(dAppToolkit.gatewayApi.state)
-
-  console.log("with tokens is giving");
-  console.log(JSON.stringify(withTokens, null, 2));
 
   useEffect(() => {
     const subscription = dAppToolkit.walletApi.walletData$
@@ -81,7 +77,7 @@ export const useAccounts = () => {
             .catch(() => {
               setState({ accounts: [], status: 'error', hasLoaded: true })
             })
-        })
+        }),
       )
       .subscribe()
 

@@ -31,23 +31,20 @@ const getStringMetadata =
 
 export const transformFungibleTokens = async (
   fungibles: FungibleResourcesVaultCollection,
-  stateApi: State
+  stateApi: State,
 ): Promise<Record<string, FungibleResource>> => {
-
-  console.log("fired transformFungibleTokens");
-  
   if (fungibles.items.length === 0) {
     return {}
   }
 
   const fungibleEntities = await stateApi.getEntityDetailsVaultAggregated(
-    fungibles.items.map(({ resource_address }) => resource_address)
+    fungibles.items.map(({ resource_address }) => resource_address),
   )
 
   return fungibleEntities.reduce<Record<string, FungibleResource>>(
     (acc, entity) => {
       const vaults = fungibles.items.find(
-        ({ resource_address }) => resource_address === entity.address
+        ({ resource_address }) => resource_address === entity.address,
       )?.vaults
 
       return {
@@ -70,7 +67,7 @@ export const transformFungibleTokens = async (
         },
       }
     },
-    {}
+    {},
   )
 }
 
@@ -90,7 +87,7 @@ export type NonFungibleResource = {
 export const transformNonFungibleTokens = async (
   nonFungibles: NonFungibleResourcesVaultCollection,
   accountAddress: string,
-  stateApi: State
+  stateApi: State,
 ) => {
   if (nonFungibles.items.length === 0) {
     return []
@@ -99,13 +96,13 @@ export const transformNonFungibleTokens = async (
   const transformedNonFungibles: NonFungibleResource[] = []
 
   const nonFungibleEntities = await stateApi.getEntityDetailsVaultAggregated(
-    nonFungibles.items.map(({ resource_address }) => resource_address)
+    nonFungibles.items.map(({ resource_address }) => resource_address),
   )
 
   const getEntityNonFungibleIDs = (
     accountAddress: string,
     nftAddress: string,
-    vaultAddress: string
+    vaultAddress: string,
   ) =>
     stateApi.innerClient.entityNonFungibleIdsPage({
       stateEntityNonFungibleIdsPageRequest: {
@@ -117,22 +114,22 @@ export const transformNonFungibleTokens = async (
 
   const getNonFungibleData = (
     address: string,
-    ids: string[]
+    ids: string[],
   ): Promise<StateNonFungibleDetailsResponseItem[]> =>
     stateApi.getNonFungibleData(address, ids)
 
   // TODO: make sure return type added by me works "Promise<string[]"
   const getNonFungibleIds = async (
     accountAddress: string,
-    nonFungibleResource: NonFungibleResourcesCollectionItemVaultAggregated
-  ) : Promise<string[]> => {
+    nonFungibleResource: NonFungibleResourcesCollectionItemVaultAggregated,
+  ): Promise<string[]> => {
     const ids: string[] = []
 
     for (const vault of nonFungibleResource.vaults.items) {
       const entityIds = await getEntityNonFungibleIDs(
         accountAddress,
         nonFungibleResource.resource_address,
-        vault.vault_address
+        vault.vault_address,
       )
 
       ids.push(...entityIds.items)
@@ -144,7 +141,7 @@ export const transformNonFungibleTokens = async (
   for (const nonFungible of nonFungibles.items) {
     const ids = await getNonFungibleIds(accountAddress, nonFungible)
     const entity = nonFungibleEntities.find(
-      ({ address }) => address === nonFungible.resource_address
+      ({ address }) => address === nonFungible.resource_address,
     )!
 
     const nftData = await getNonFungibleData(nonFungible.resource_address, ids)
@@ -169,6 +166,6 @@ export const transformNonFungibleTokens = async (
       resourceManager.push(curr)
       return { ...acc, [curr.address]: resourceManager }
     },
-    {}
+    {},
   )
 }

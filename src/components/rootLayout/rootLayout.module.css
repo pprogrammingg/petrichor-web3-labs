@@ -1,8 +1,8 @@
 .navBar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
 }
 
 .navBarConnectWallet {
@@ -15,36 +15,36 @@
 }
 
 .navBarItem {
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
-    margin: 0 10px;
-    padding: 5px 10px;
-    transition: color 0.3s;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-}
-  
-.navBarItem:hover {
-    color: #006699; /* Dark teal/bluish color */
-}
-  
-@media (max-width: 600px) {
-    .navBar {
-      flex-direction: column;
-      align-items: flex-end;
-      margin: 10px;
-    }
-  
-    .navBarItem {
-      margin: 5px;
-      padding: 3px 8px;
-    }
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  margin: 0 10px;
+  padding: 5px 10px;
+  transition: color 0.3s;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
 }
 
- /* Create a container for the main content */
+.navBarItem:hover {
+  color: #006699; /* Dark teal/bluish color */
+}
+
+@media (max-width: 600px) {
+  .navBar {
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 10px;
+  }
+
+  .navBarItem {
+    margin: 5px;
+    padding: 3px 8px;
+  }
+}
+
+/* Create a container for the main content */
 .mainContainer {
   display: flex;
   flex-direction: column; /* Stack items vertically */
@@ -62,8 +62,7 @@
 
 /* Apply responsive design for smaller screens */
 @media (max-width: 768px) {
-    .mainContent {
-        width: 100%;
-    }
+  .mainContent {
+    width: 100%;
+  }
 }
-  

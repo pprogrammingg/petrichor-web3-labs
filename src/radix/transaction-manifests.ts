@@ -1,11 +1,11 @@
 import { ResourceAddresses } from '../config'
-import { NonFungibleResource } from '../transformers/addTokens';
+import { NonFungibleResource } from '../transformers/addTokens'
 // import { NonFungibleResource } from '../transformers/addTokens'
 
 export const TransactionManifests = ({
   memberComponentAddress,
 }: ResourceAddresses) => {
-  const mintMemberCard = (accountAddress: string) : string => {
+  const mintMemberCard = (accountAddress: string): string => {
     return `
         CALL_METHOD
             Address("${memberComponentAddress}")
@@ -14,17 +14,17 @@ export const TransactionManifests = ({
             Address("${accountAddress}")
             "deposit_batch"
             Expression("ENTIRE_WORKTOP");
-      `;
+      `
   }
 
   const getRewardsWithReason = (
     accountAddress: string,
     amount: string,
     reason: string,
-    memberCard: NonFungibleResource
+    memberCard: NonFungibleResource,
   ): string => {
-    console.log(`Issuing reward amount: ${amount}", for reason: ${reason}`);
-    return  `
+    console.log(`Issuing reward amount: ${amount}", for reason: ${reason}`)
+    return `
           CALL_METHOD
               Address("${accountAddress}")
               "create_proof_of_non_fungibles"
@@ -43,8 +43,8 @@ export const TransactionManifests = ({
               Address("${accountAddress}")
               "deposit_batch"
               Expression("ENTIRE_WORKTOP");
-      `;
+      `
   }
 
-  return { mintMemberCard, getRewardsWithReason  }
+  return { mintMemberCard, getRewardsWithReason }
 }

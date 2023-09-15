@@ -5,14 +5,19 @@ import {
   RadixDappToolkit,
   createLogger,
 } from '@radixdlt/radix-dapp-toolkit'
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
-import { RadixProvider } from './radix/RadixProvider';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom'
+import { RadixProvider } from './radix/RadixProvider'
 import { config } from './config'
-import TaskList from './components/TaskList/TaskList';
-import Member from './components/membership/Member';
-import Home from './components/home/Home';
-import ErrorPage from './components/errorPage/ErrorPage';
-import RootLayout from './components/rootLayout/RootLayout';
+import TaskList from './components/TaskList/TaskList'
+import Member from './components/membership/Member'
+import Home from './components/home/Home'
+import ErrorPage from './components/errorPage/ErrorPage'
+import RootLayout from './components/rootLayout/RootLayout'
 
 declare global {
   namespace JSX {
@@ -31,9 +36,9 @@ const router = createBrowserRouter(
       <Route path="/member" element={<Member />} />
       <Route path="/tasks" element={<TaskList taskList={[]} />} />
       <Route path="*" element={<ErrorPage />} />
-    </Route>
-  )
-);
+    </Route>,
+  ),
+)
 
 export default function App() {
   const [state, setState] = useState<RadixDappToolkit | undefined>()
@@ -47,7 +52,7 @@ export default function App() {
     })
 
     radixDappToolkit.walletApi.setRequestData(
-      DataRequestBuilder.accounts().atLeast(1)
+      DataRequestBuilder.accounts().exactly(1),
     )
 
     setState(radixDappToolkit)
@@ -57,7 +62,7 @@ export default function App() {
 
   return (
     <RadixProvider value={state}>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </RadixProvider>
   )
 }

@@ -16,17 +16,17 @@ export const useSendTransactionManifest = () => {
         accountAddress: string,
         amount: string,
         reason: string,
-        memberCard: NonFungibleResource
+        memberCard: NonFungibleResource,
       ) =>
         sendTransaction(
           transactionManifests.getRewardsWithReason(
             accountAddress,
             amount,
             reason,
-            memberCard
-          )
-        )
+            memberCard,
+          ),
+        ),
     }),
-    [sendTransaction, transactionManifests]
+    [sendTransaction, transactionManifests],
   )
 }

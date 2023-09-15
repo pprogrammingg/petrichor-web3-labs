@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import styles from './task.module.css';
+import { useState } from 'react'
+import styles from './task.module.css'
 
 interface TaskProps {
-  taskText: string;
+  taskText: string
 }
 
 function Task({ taskText }: TaskProps) {
-  const [completed, setCompleted] = useState(false);
-  const simpleTaskReward = import.meta.env.VITE_SIMPLE_TASK_REWARD || 0; // Default to 0 if not set
+  const [completed, setCompleted] = useState(false)
+  const simpleTaskReward = import.meta.env.VITE_SIMPLE_TASK_REWARD || 0 // Default to 0 if not set
 
   const handleComplete = () => {
     if (!completed) {
-      console.log("task text is: " + taskText)
-      console.log("Reward Amount is: " + simpleTaskReward);
-      setCompleted(true);
+      console.log('task text is: ' + taskText)
+      console.log('Reward Amount is: ' + simpleTaskReward)
+      setCompleted(true)
     }
-  };
+  }
 
   return (
     <div className={styles.taskCard}>
@@ -30,7 +30,7 @@ function Task({ taskText }: TaskProps) {
         </button>
       )}
     </div>
-  );
+  )
 }
 
-export default Task;
+export default Task

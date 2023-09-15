@@ -6,14 +6,13 @@ export const hasMemberCard = (accounts: AccountWithTokens[]) =>
   accounts.some(
     (account) =>
       Object.values(
-        account.nonFungibleTokens[
-          config.addresses.memberCardResourceAddress
-        ] || {}
-      ).length > 0
+        account.nonFungibleTokens[config.addresses.memberCardResourceAddress] ||
+          {},
+      ).length > 0,
   )
 
 export const getMemberCard = (
-  account: AccountWithTokens
+  account: AccountWithTokens,
 ): NonFungibleResource | undefined => {
   const memberCards =
     account.nonFungibleTokens[config.addresses.memberCardResourceAddress]

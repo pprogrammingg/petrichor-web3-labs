@@ -26,100 +26,62 @@
 [x] Populate with NFT data
 [x] Understand wallet data (means persona, identities, proofs, accounts) changes vs balance changes (FT and NFT detaisl form gateway)
 [x] Understand how examples for how observable and gateway APIs are used
-[x] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
+[] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
 
-[] adapt to Gumball machine example [Gumball Example](https://github.com/radixdlt/gumball-club/blob/main/dapp/src/app/hooks/useAccounts.ts)
-   [] radix/transaction-manifests.ts (pending testing)
-   [] transformers/addTokens.ts (pending testing)
+[] adapt to Gumball machine example [Gumball Example](https://github.com/radixdlt/gumball-club/blob/main/
+dapp/src/app/hooks/useAccounts.ts)
+
+   [x] radix/transaction-manifests.ts (pending testing)
+   [x] transformers/addTokens.ts (pending testing)
    [] hooks and helpers (pending testing)
-   [] header and alerts
+   [x] different component states based on button and use Account
+      [x] useButton and useAccount should be de-coupled when member page rendered without any change to connect button. Means we should get 1 component mounted render + 2 re-renders for each of useAccounts setState operations. Button status gets set on the first component mount as useEffect inside has empty array dependency.
+      [x] Change account now, the dAppToolkit should cause useEffect inside useAccount to trigger, causing additional 2 renders and subsequently token data change.
+   [] header and alerts infra
+    [] test update share data using the connect button and reject to see alert
+
    [] footer
+
    
-[] Move the whole App.tsx
-[] make sure rdt context carries balances and is available to all modules
-[] UI: get NFT internal data for all NFTs available
-[] handle network errors gracefully
-
-=== Notification Popup modal 
-[] create a custom popup modal that pops on top left of the page (temporarily covering nav bar, it takes a "message string no longer than 20 characters (otherwise will fail to build the modal). Popup has an X to exit
-[] the pop has a great style to capture user attention, has smooth transition (appearance and exit) and exits after 3 second
-[] additional popups appearing, will push the oldest popup to the bottom
-[] At one time not more than 5 popups can be displayed
-
 === Membership page
 [x] in App.tsx will have a new Member page
 [x] When user clicks member they will be taken to member page (for now empty)
-[] Member page will have a Card Section if membership NFT badge present (if no membership badge, then mint card button with message "You are not a member yet! Mint member ship card easily by pressing below!")
-[] Member page will have a reward balance section, big size cool font
-[] Member page will have a section called "Transaction History" section
 
-    - if member_card_details are not null, display a simple but slick card object that looks like a bank card, it should be very slick as if implying the card is a shiny sheet of metal and has some sort of reflection coming out of it, the color of the card should be a red orange combination similar to parsimmon, the card should reflect some sort of ambiance light. The card in the top left cornet should have in a bigger awesome looking font have words: 
-    "MemberShip Card" , Then somewhere below it say "Member Since: put date"
+[] if not connected to persona and account - ask to connect first and select exactly one account
+[] if connected and 1 account loaded
+    [] if accounts has membership card show member profile
+    [] if no membership card, show mint card button
 
-[] create Transaction_Hisotry and Transaction component: 
-Transaction_Hisotry takes an array of Transaction component as props.
-Each Transation item in TrasnactionList input will be rendered on a separate row with each Transaction Field as its own column.
+[] user clicks "Mint Member Card", shows loading sign (waiting for transaction)
+    [] call DLT mint membershipcard
+    [] try with sendTransaction({manifest, message}) 
+    [] succcess received (member card minted), will show member profile section
+    [] error show header error, transaction failed, bring mint back
+    [] refresh during load will go to loading, success or error state depending on what is in progress
+
+[] if mint is success, show member profile
+
+[] Member page will have a member profile page (for now just card) in the top left corner (with some margin from outlet borders) 
 
 
-Transaction has the following props 
-{
-    transaction_date_time: String
-    transaction_description: String
-    rewards_earned: Number
-    rewards_redeemed: Number
-    transaction_status: # an Enum of TX_STATUS:COMPLETED, FAILED
-}
 
-[] Make the TransactionList readable by slighly highliting everyother row to some nice complementary color combination. As usually, keep the page responsive please. In case of shrinking pages transfer each overflow Transaction column to the next row.
-Always maintain a reasonable gap between each row in TransactionList
 
-[] 
+[x] if account has membercard, display a simple but slick card object that looks like a bank card, it should be very slick as if implying the card is a shiny sheet of metal and has some sort of reflection coming out of it, the color of the card should be a red orange combination similar to parsimmon. 
 
-[] Bottom half of the page will render TransactionList. For now provide the following sample TransactionList data to the TransactionList component and render it:
+[] Member Profile
+    [] Member card (top left)
+    [] Member Reward balance section and card levle (top right)
 
-```javascript
-[  
-    {
-        transaction_date_time: "2023-JUL-12 11:01:23"
-        transaction_description:  "Task: Say Hi!",
-        rewards_earned: 10,
-        rewards_redeemed: 0,
-        transaction_status: TX_STATUS::COMPLETED
-    },
-    {
-        transaction_date_time: "2022-MAY-29 08:21:03"
-        transaction_description:  "Poll Name: 2022 Board Elections",
-        rewards_earned: 20,
-        rewards_redeemed: 0,
-        transaction_status: TX_STATUS::COMPLETED
-    },
-    {
-        transaction_date_time: "2022-MAY-29 08:20:12"
-        transaction_description:  "Poll Name: 2022 Board Elections",
-        rewards_earned: 20,
-        rewards_redeemed: 0,
-        transaction_status: TX_STATUS::REJECTED
-    },
-    {
-        transaction_date_time: "2021-DEC-01 14:00:59"
-        transaction_description:  "Event: Annual ISACA Convention",
-        rewards_earned: 50,
-        rewards_redeemed: 0,
-        transaction_status: TX_STATUS::COMPLETED
-    }
-]
-```
 
-=== Tasks
+
+=== Tasks (simplify)
 
 [ ] Task component: simple task card (10 words or less), width to height has golden ratio, height beigger than width at least twice, simple task has a complete button, clicking it console.logs "reward amount" associated with the task (more on this later) and after complete the button changes from Complete to Completed (cannot be clicked). The colors are as such:
 task card main background white, text black, complete button round corners with medium blue outline, completed button a nice grey background and white completed.
 
 [] change task props above,show a sample Task on the App.tsx test. The text input to this task is "Just say hi!". 
 
-[] DLT: completion of task should require member NFT badge to be present.
-[] UI: If no membership badge is present, "complete" button is disable. Hovering over will say "You do not have a membership card yet to complete task. Please go to Member page and mint a card" 
-[] DLT: compeletion of a task will update NFT data "transaction_history_key" and for value will update a transaction history `<String, String>` ordered map. Capacity 10 records, if more than 10 records remove the oldest record and add the newest. 
+[] UI: If no membership badge is present, "complete" button is disabled / task will look dimmer. Put a friendly message up there for user to obtain member badge. Please go to Member page and mint a card".
 
 [] UI: wait for task completion to finish on ledger. Then display a nice popup module
 
@@ -192,13 +154,78 @@ and second one as:
 
 [] Now we are only going to render TaskList from Tasks page, here a route will be created on App.tsx where clicking the tasks page will go to that Task page and load TaskList. For now use sample Task props previuosly to populate this new task page.
 
+=== Error and Notification handling
+[] create a custom popup modal that pops on top left of the page (temporarily covering nav bar, it takes a "message string no longer than 20 characters (otherwise will fail to build the modal). Popup has an X to exit
+[] the pop has a great style to capture user attention, has smooth transition (appearance and exit) and exits after 3 second
+[] additional popups appearing, will push the oldest popup to the bottom
+[] At one time not more than 5 popups can be displayed
+[] Wallet errors test
+[] network error tests
+
+== Linting and prettifying
+[] add linter and prettifiers in dev dependencies
+
+=== Transaction History
+[] can blockchian explorer and transaction memo be used?
+
+[] create Transaction_Hisotry and Transaction component (update on member NFT data - date, reason)
+Transaction_Hisotry takes an array of Transaction component as props.
+Each Transation item in TrasnactionList input will be rendered on a separate row with each Transaction Field as its own column.
+
+
+Transaction has the following props 
+{
+    transaction_date_time: String
+    transaction_description: String
+    rewards_earned: Number
+    rewards_redeemed: Number
+    transaction_status: # an Enum of TX_STATUS:COMPLETED, FAILED
+}
+
+[] Make the TransactionList readable by slighly highliting everyother row to some nice complementary color combination. As usually, keep the page responsive please. In case of shrinking pages transfer each overflow Transaction column to the next row.
+Always maintain a reasonable gap between each row in TransactionList
+
+
+[] Bottom half of the page will render TransactionList. For now provide the following sample TransactionList data to the TransactionList component and render it:
+
+```javascript
+[  
+    {
+        transaction_date_time: "2023-JUL-12 11:01:23"
+        transaction_description:  "Task: Say Hi!",
+        rewards_earned: 10,
+        rewards_redeemed: 0,
+        transaction_status: TX_STATUS::COMPLETED
+    },
+    {
+        transaction_date_time: "2022-MAY-29 08:21:03"
+        transaction_description:  "Poll Name: 2022 Board Elections",
+        rewards_earned: 20,
+        rewards_redeemed: 0,
+        transaction_status: TX_STATUS::COMPLETED
+    },
+    {
+        transaction_date_time: "2022-MAY-29 08:20:12"
+        transaction_description:  "Poll Name: 2022 Board Elections",
+        rewards_earned: 20,
+        rewards_redeemed: 0,
+        transaction_status: TX_STATUS::REJECTED
+    },
+    {
+        transaction_date_time: "2021-DEC-01 14:00:59"
+        transaction_description:  "Event: Annual ISACA Convention",
+        rewards_earned: 50,
+        rewards_redeemed: 0,
+        transaction_status: TX_STATUS::COMPLETED
+    }
+]
+```
 
 ===Member page enhancements
-[] Create Member_Progress component, input to this is 
-{member_level: NUMBER}
-based on member_level we show a progress bar as such:
+[] tilt effect on membercard using CSS
+[] tilts effect on membercard, realistic lightning using three.js
 
-the prograss bar is a card with a golden ration width to height  The length is about 3/10th of the screens length and height is like not that big maybe like a small paragraph length.
+[] the prograss bar is a card with a golden ration width to height  The length is about 3/10th of the screens length and height is like not that big maybe like a small paragraph length.
 
 On top will say : "Member Progress"
 The progress card background is creamy yellow
