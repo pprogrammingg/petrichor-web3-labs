@@ -1,0 +1,19 @@
+.centeredContainer {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  grid-template-rows: 1fr 0.618fr; /* Golden ratio division */
+}
+
+.mintText {
+  text-align: center;
+  padding: 20px;
+}
+
+.mintButtonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px; /* Adjust the gap between the text and button */
+}

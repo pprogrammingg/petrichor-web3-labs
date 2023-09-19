@@ -18,3 +18,21 @@ export const getMemberCard = (
     account.nonFungibleTokens[config.addresses.memberCardResourceAddress]
   return memberCards ? memberCards[0] : undefined
 }
+
+export const getMemberCardJsonData = (
+  memberCard: NonFungibleResource | undefined,
+): Record<string, any> | undefined => {
+  // Initialize an empty result object
+  const result: Record<string, any> = {}
+
+  // Use optional chaining to safely access memberCard.data
+  memberCard?.data?.programmatic_json?.fields?.forEach(
+    (item: Record<string, any>) => {
+      const { field_name, ...rest } = item
+      result[field_name] = { ...rest }
+    },
+  )
+
+  // Return the result
+  return result
+}

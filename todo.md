@@ -26,7 +26,6 @@
 [x] Populate with NFT data
 [x] Understand wallet data (means persona, identities, proofs, accounts) changes vs balance changes (FT and NFT detaisl form gateway)
 [x] Understand how examples for how observable and gateway APIs are used
-[] poll for new balance from wallet every 5 sec using interval, setState and setEffect hooks used by Member
 
 [] adapt to Gumball machine example [Gumball Example](https://github.com/radixdlt/gumball-club/blob/main/
 dapp/src/app/hooks/useAccounts.ts)
@@ -41,36 +40,35 @@ dapp/src/app/hooks/useAccounts.ts)
     [] test update share data using the connect button and reject to see alert
 
    [] footer
-
+   [] Make global fonts similar to Gumball
    
 === Membership page
 [x] in App.tsx will have a new Member page
 [x] When user clicks member they will be taken to member page (for now empty)
 
-[] if not connected to persona and account - ask to connect first and select exactly one account
-[] if connected and 1 account loaded
-    [] if accounts has membership card show member profile
-    [] if no membership card, show mint card button
+[x] if not connected to persona and account - ask to connect first and select exactly one account
 
-[] user clicks "Mint Member Card", shows loading sign (waiting for transaction)
-    [] call DLT mint membershipcard
+[x] if connected and 1 account loaded
+    [x] if accounts has membership card show member profile
+    [x] if no membership card, show mint card button
+
+[x] user clicks "Mint Member Card", shows loading sign (waiting for transaction)
+ [] Happy path tests
+    [x] call DLT mint membershipcard
     [] try with sendTransaction({manifest, message}) 
-    [] succcess received (member card minted), will show member profile section
-    [] error show header error, transaction failed, bring mint back
-    [] refresh during load will go to loading, success or error state depending on what is in progress
+    [x] succcess received (member card minted), will show member profile section
 
-[] if mint is success, show member profile
 
 [] Member page will have a member profile page (for now just card) in the top left corner (with some margin from outlet borders) 
 
 
-
-
-[x] if account has membercard, display a simple but slick card object that looks like a bank card, it should be very slick as if implying the card is a shiny sheet of metal and has some sort of reflection coming out of it, the color of the card should be a red orange combination similar to parsimmon. 
+[x] Membership card a slick card object that looks like a bank card, it should be very slick as if implying the card is a shiny sheet of metal and has some sort of reflection coming out of it, the color of the card should be a red orange combination similar to parsimmon. 
+    [] use embossed looking format - say "Issued: " 
+    [] Have ISACA written on it
 
 [] Member Profile
     [] Member card (top left)
-    [] Member Reward balance section and card levle (top right)
+    [] Member Reward balance section and card level (top right)
 
 
 
@@ -265,3 +263,8 @@ issueWarning @ reactive-element.ts:76
 (anonymous) @ reactive-element.ts:81
 
 [] Warning: css-tag.ts:80 @import rules are not allowed here. See https://github.com/WICG/construct-stylesheets/issues/119#issuecomment-588352418.
+
+
+=== Coolify with Animation and oooomph graphics
+[] Hyper channel - Effect of mouseover logo
+[] Titling cards

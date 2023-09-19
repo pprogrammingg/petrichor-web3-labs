@@ -1,0 +1,20 @@
+.button {
+  /* Your button styles here */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff6b6b; /* Complimentary color (pink/coral) */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #ff4d4d; /* Darker shade on hover */
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

@@ -1,6 +1,5 @@
 import 'react'
-import styles from './membership_card.module.css' // Import CSS file for styling
-import { Form } from 'react-router-dom'
+import styles from './memberCard.module.css'
 
 const MembershipCard = () => {
   return (
@@ -8,8 +7,7 @@ const MembershipCard = () => {
       <div className={styles.memberShipCardContent}>
         <div className={styles.topLeftText}>Rustasian</div>
         <div className={styles.bottomRightText}>
-          <div>Level: 3</div>
-          <div>Member Since: 28/02/2023</div>
+          <div>Company Name</div>
         </div>
       </div>
     </div>

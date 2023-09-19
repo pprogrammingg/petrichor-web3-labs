@@ -12,12 +12,12 @@ import {
   Route,
 } from 'react-router-dom'
 import { RadixProvider } from './radix/RadixProvider'
-import { config } from './config'
-import TaskList from './components/TaskList/TaskList'
+import RootLayout from './components/rootLayout/RootLayout'
 import Member from './components/membership/Member'
+import CardList from './components/CardList/cardList'
 import Home from './components/home/Home'
 import ErrorPage from './components/errorPage/ErrorPage'
-import RootLayout from './components/rootLayout/RootLayout'
+import { config } from './config'
 
 declare global {
   namespace JSX {
@@ -34,7 +34,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/member" element={<Member />} />
-      <Route path="/tasks" element={<TaskList taskList={[]} />} />
+      <Route path="/tasks" element={<CardList cardList={[]} />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>,
   ),

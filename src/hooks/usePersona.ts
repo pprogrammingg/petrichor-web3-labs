@@ -12,7 +12,7 @@ export const usePersona = () => {
   useEffect(() => {
     const subscription = dAppToolkit.walletApi.walletData$.subscribe(
       (state) => {
-        setState({ persona: state.persona, hasLoaded: true })
+        setState({ persona: state.persona, hasLoaded: true }) //hasLoaded: !!state.persona
       },
     )
 

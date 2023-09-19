@@ -1,0 +1,9 @@
+/* Styles for the card list container */
+.cardListContainer {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Define the grid columns */
+  gap: 20px; /* Gap between cards */
+}

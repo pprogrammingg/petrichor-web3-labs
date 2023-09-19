@@ -82,6 +82,10 @@ export type NonFungibleResource = {
   tags?: string[]
   totalSupply: string
   explicitMetadata?: EntityMetadataCollection
+  data?: Partial<{
+    raw_hex: string
+    programmatic_json: Record<string, any>
+  }>
 }
 
 export const transformNonFungibleTokens = async (
@@ -145,13 +149,13 @@ export const transformNonFungibleTokens = async (
     )!
 
     const nftData = await getNonFungibleData(nonFungible.resource_address, ids)
-
     for (const singleNftData of nftData) {
       transformedNonFungibles.push({
         type: 'non-fungible',
         id: singleNftData.non_fungible_id,
         address: `${entity.address}`,
         name: getStringMetadata('name')(entity.metadata),
+        data: singleNftData.data,
         totalSupply: (
           entity.details as StateEntityDetailsResponseFungibleResourceDetails
         ).total_supply,
