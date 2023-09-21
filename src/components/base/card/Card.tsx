@@ -12,9 +12,5 @@ export const Card = ({
   outerClassName = '',
   className = '',
 }: CardProps) => {
-  return (
-    <div className={`${styles['card-shadow']} ${outerClassName}`}>
-      <div className={`${styles['card']} ${className}`}>{children}</div>
-    </div>
-  )
+  return <div className={`${styles['card']} ${className}`}>{children}</div>
 }

@@ -1,3 +1,13 @@
+=== Today
+[x] let card accept children and button to card
+[x] disable button based on has member card flag
+[] useEffect so when reward is obtained, "complete" button changes to green button with checkmark. 
+[] handle if reward was not obtained, in this case account should not have any effect
+[] make card look disabled if no member card
+
+[] Error header and notification
+
+
 
 === Main App Style
 
@@ -58,99 +68,27 @@ dapp/src/app/hooks/useAccounts.ts)
     [] try with sendTransaction({manifest, message}) 
     [x] succcess received (member card minted), will show member profile section
 
-
-[] Member page will have a member profile page (for now just card) in the top left corner (with some margin from outlet borders) 
-
-
 [x] Membership card a slick card object that looks like a bank card, it should be very slick as if implying the card is a shiny sheet of metal and has some sort of reflection coming out of it, the color of the card should be a red orange combination similar to parsimmon. 
-    [] use embossed looking format - say "Issued: " 
-    [] Have ISACA written on it
 
-[] Member Profile
-    [] Member card (top left)
-    [] Member Reward balance section and card level (top right)
+
+[] Styling: memberprofile should be contained within a grid (divid available space 2 rowsx3 columns grid)
+    [] if has memberhsip card, first cell show card (centered), cell to right occupies till remaining width and contains member level and member join date info (in a paragraph)
+    [] if not have membercard, display mint centered in row0cell1 (middle top)
+
+[] Styling: Member card, glass card tutorial but with persimmon (orange red) hue, plus embossed Persona, account name,
+"COMPANY NAME" LOGO (shiny/holographic if possible)
 
 
 
 === Tasks (simplify)
 
-[ ] Task component: simple task card (10 words or less), width to height has golden ratio, height beigger than width at least twice, simple task has a complete button, clicking it console.logs "reward amount" associated with the task (more on this later) and after complete the button changes from Complete to Completed (cannot be clicked). The colors are as such:
+[ ] Task component: simple task card that accepts children react node and description, width to height has golden ratio, height beigger than width at least twice, simple task has a complete button, clicking it console.logs "reward amount" associated with the task (more on this later) and after complete the button changes from Complete to Completed (cannot be clicked). The colors are as such:
 task card main background white, text black, complete button round corners with medium blue outline, completed button a nice grey background and white completed.
-
-[] change task props above,show a sample Task on the App.tsx test. The text input to this task is "Just say hi!". 
 
 [] UI: If no membership badge is present, "complete" button is disabled / task will look dimmer. Put a friendly message up there for user to obtain member badge. Please go to Member page and mint a card".
 
-[] UI: wait for task completion to finish on ledger. Then display a nice popup module
-
-[] in Task css you posted, what do the following do:
-
-```css
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-```
-
-
-
-[] Now , create a Vote component whose defining properties is a JSON object as such:
-```
-{
-    poll_id: 123,
-    description:2023-board-elections,
-    select_type: multi | single,
-    choices: [ // array of string, this will be used to render choice options
-        
-    ]
-}
-
-```
-this Vote component will be embeded inside Task components usually (remeber the CSS that went to define task component).
-Here make sure description is displayed as medium blue  and each item under choices is black. depending on whether select_type is multi or single display it option boxes or single select radio buttons. 
-
-
-[] In the task component previously made, allow Task properties to be structured like this :
-
-{
-   task_details: # values can be  String, or Vote component for now
-}
-
-
-if Task details matches String then just render simple String as before.
-if VOTE is chosen, then  render the Vote object inside task displaying its String description and choice options (discern when rendering between multi-choice or single choice) depending on Vote select_type field. Complete button for such task will change text to "Vote" and completed will be "Thanks for Voting!". 
-Finally, poll_id and selected option from Vote props should appear as an extra field on the "Vote" button, these will be stored in some sort of field so that in future complete requests will be send to other systems as useful data
-
-
-[] In App.tsx create two additional Tasks containg a Vote component as properties first one has props:
-
-{
-    poll_id: 1,
-    description: "How much budget should be allocated as ISACA Web3 gas fees?" ,
-    select_type: multi,
-    choices: [ 
-        "1000 CAD", "2000 CAD", 
-    ]
-}
-
-and second one as:
-
-{
-    poll_id: 2,
-    description: "What should we support next in ISACA Web3 journey?" ,
-    select_type: single,
-    choices: [ 
-        "Immutable Storage of Training Degrees", "Redeem rewards for swag", "Rewards LeaderBoard", 
-    ]
-}
-
 
 [] TaskList: now given task component you coded above, have a TaskList component where we can show case bunch of Task components. The input to this TaskList component is a taskList object (containing Task components). TaskList component will show every item of the list in a grid and overflows will go to the next row. There will be a gap (or gutter) distance between Task items in this grid (choose a golden ratio amount that is reasonable). Make sure the page will be responsive and resizing the page cause overflow to the items to the next row and fill up the remaining space.
-
-
-[] in App.tsx take he simple and 2 vote tasks props and use them to create TaskList component. Display this taskList component instead of indiivual Tasks 
-
-[] Now we are only going to render TaskList from Tasks page, here a route will be created on App.tsx where clicking the tasks page will go to that Task page and load TaskList. For now use sample Task props previuosly to populate this new task page.
 
 === Error and Notification handling
 [] create a custom popup modal that pops on top left of the page (temporarily covering nav bar, it takes a "message string no longer than 20 characters (otherwise will fail to build the modal). Popup has an X to exit

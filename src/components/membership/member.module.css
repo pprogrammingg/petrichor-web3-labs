@@ -1,19 +1,38 @@
-.centeredContainer {
+.containerGrid {
   display: grid;
   place-items: center;
-  height: 100vh;
-  grid-template-rows: 1fr 0.618fr; /* Golden ratio division */
+  height: 50vh;
+  grid-template-columns: 1.5fr 2fr; /* 3 columns */
+  grid-template-rows: 0.15fr 1fr; /* First row is half, next two rows are full */
+  justify-items: start;
 }
 
-.mintText {
-  text-align: center;
-  padding: 20px;
+.memberPageHeading {
+  grid-column-start: 1; /* Start in the first column */
+  grid-column-end: 2; /* End in the second column */
+  grid-row-start: 1; /* Start in the first row */
+  grid-row-end: 2; /* End in the second row */
 }
 
 .mintButtonContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 20px; /* Adjust the gap between the text and button */
+  width: 500px;
+  height: 500px;
+  grid-column-start: 1; /* Start in the second column */
+  grid-column-end: 2; /* End in the third column */
+  grid-row-start: 2; /* Start in the second row */
+  grid-row-end: 3; /* End in the third row */
+}
+
+.memberCardContainer {
+  grid-column-start: 1; /* Start in the first column */
+  grid-column-end: 2; /* End in the second column */
+  grid-row-start: 2; /* Start in the second row */
+  grid-row-end: 3; /* End in the third row */
+}
+
+.memberCardInfo {
+  grid-column-start: 2; /* Start in the second column */
+  grid-column-end: 3; /* End in the third column (spans to the end) */
+  grid-row-start: 2; /* Start in the second row */
+  grid-row-end: 3; /* End in the third row */
 }

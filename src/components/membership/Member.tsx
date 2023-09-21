@@ -1,6 +1,7 @@
 import {
   getMemberCard,
   getMemberCardJsonData,
+  getMemberCardNonFungibleId,
   hasMemberCard,
 } from '../../helpers/memberUtils'
 import { useAccounts } from '../../hooks/useAccounts'
@@ -61,30 +62,28 @@ function Member() {
   const hasMemberShip = hasMemberCard(accounts)
 
   if (!hasMemberShip) {
-    {
-      console.log('no member card')
-    }
+    console.log('no member card')
+
     return (
-      <div className={styles.centeredContainer}>
-        <div className={styles.mintText}>
+      <div className={styles.containerGrid}>
+        <div className={styles.mintButtonContainer}>
           <p>Mint your membershipcard first!</p>
-          <div className={styles.mintButtonContainer}>
-            <Button
-              onClick={() => {
-                if (selectedAccount) {
-                  mintMemberCard(selectedAccount).map(refresh)
-                }
-              }}
-            >
-              Mint NFT
-            </Button>
-          </div>
+          <Button
+            onClick={() => {
+              if (selectedAccount) {
+                mintMemberCard(selectedAccount).map(refresh)
+              }
+            }}
+          >
+            Mint NFT
+          </Button>
         </div>
       </div>
     )
   }
 
   const memberCard = hasMemberShip ? getMemberCard(accounts[0]) : undefined
+  const memberCardId = getMemberCardNonFungibleId(memberCard)
   const memberCardData = getMemberCardJsonData(memberCard)
 
   const memberLevel = memberCardData?.level?.value
@@ -102,14 +101,17 @@ function Member() {
 
   return (
     <>
-      <h1>Welcome Member!</h1>
-
       {hasMemberShip && (
-        <div>
-          <MembershipCard></MembershipCard>
-
-          <p> Member joined on: {memberSinceLocal} </p>
-          <p> Member Level : {memberLevel} </p>
+        <div className={styles.containerGrid}>
+          <h1 className="memberPageHeading">Welcome Member!</h1>
+          <div className={styles.memberCardContainer}>
+            <MembershipCard></MembershipCard>
+          </div>
+          <div className={styles.memberCardInfo}>
+            <p> Member joined on: {memberSinceLocal} </p>
+            <p> Member Level : {memberLevel} </p>
+            <p> Member Card ID: {memberCardId} </p>
+          </div>
         </div>
       )}
     </>

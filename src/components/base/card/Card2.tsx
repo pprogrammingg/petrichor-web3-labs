@@ -1,26 +1,17 @@
-import { ReactNode } from 'react'
 import styles from './Card2.module.css'
 
-interface CardProps2 {
-  children: ReactNode
-  description: string
-  buttonText: string
-  className?: string
-}
-
-export const Card2 = ({
-  children,
-  description,
-  buttonText,
-  className = '',
-}: CardProps2) => {
+export const Card2 = () => {
   return (
-    <div className={`${styles['glass-card']} ${className}`}>
-      <div className={styles['glass-content']}>
-        <div className={styles['glass-description']}>{description}</div>
-        <button className={styles['glass-button']}>{buttonText}</button>
+    <div className={styles.card}>
+      <div className={styles.content}>
+        <h2>01</h2>
+        <h3>Card One</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt
+        </p>
+        <a href="#">Read More</a>
       </div>
-      <div className={styles['glass-body']}>{children}</div>
     </div>
   )
 }

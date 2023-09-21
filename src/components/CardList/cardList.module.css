@@ -7,3 +7,14 @@
   ); /* Define the grid columns */
   gap: 20px; /* Gap between cards */
 }
+
+.cardDescription {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align the text towards the top */
+  text-align: center; /* Left-align the text content */
+}
+
+.cardButton {
+  border-radius: 50px;
+}

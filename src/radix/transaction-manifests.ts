@@ -21,22 +21,44 @@ export const TransactionManifests = ({
     accountAddress: string,
     amount: string,
     reason: string,
-    memberCard: NonFungibleResource,
+    memberCardResourceAddress: string,
+    memberCardId: string,
   ): string => {
     console.log(`Issuing reward amount: ${amount}", for reason: ${reason}`)
+    console.log(`
+    CALL_METHOD
+        Address("${accountAddress}")
+        "create_proof_of_non_fungibles"
+        Address("${memberCardResourceAddress}")
+        Array<NonFungibleLocalId>(
+            NonFungibleLocalId("${memberCardId}")
+        );
+
+    CALL_METHOD
+        Address("${memberComponentAddress}")
+        "get_reward_with_reason"
+        ${amount}u64
+        "loving the users of this dApp";
+
+    CALL_METHOD
+        Address("${accountAddress}")
+        "deposit_batch"
+        Expression("ENTIRE_WORKTOP");
+`)
+
     return `
           CALL_METHOD
               Address("${accountAddress}")
               "create_proof_of_non_fungibles"
-              Address("${memberCard}")
+              Address("${memberCardResourceAddress}")
               Array<NonFungibleLocalId>(
-                  NonFungibleLocalId("#1#")
+                  NonFungibleLocalId("${memberCardId}")
               );
 
           CALL_METHOD
               Address("${memberComponentAddress}")
               "get_reward_with_reason"
-              ${amount}
+              ${amount}u64
               "loving the users of this dApp";
 
           CALL_METHOD
