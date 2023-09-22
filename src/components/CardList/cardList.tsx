@@ -11,6 +11,7 @@ import { Button } from '../base/button'
 import { CardProps, Card } from '../base/card'
 import { config } from '../../config'
 import styles from './cardList.module.css'
+import { useState } from 'react'
 
 /**
  * cardLis for now is not really used, maybe in future an API or another process will
@@ -19,8 +20,11 @@ import styles from './cardList.module.css'
  * @returns
  */
 const CardList = ({ cardList }: { cardList: CardProps[] }) => {
-  console.log('rendering member')
-  // const connectButtonState =
+  console.log('rendering cardList')
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const [cardClassName, setCardClassName] = useState(styles.card)
+
   useConnectButtonState()
 
   const {
@@ -55,12 +59,16 @@ const CardList = ({ cardList }: { cardList: CardProps[] }) => {
   const hasMemberShip = hasMemberCard(accounts)
 
   let onClick = () => {}
-  const buttonDisabled = !hasMemberShip
 
   if (hasMemberShip) {
+    console.log('User has membership card!')
     const memberCard = getMemberCard(accounts[0])
     const memberCardId = getMemberCardNonFungibleId(memberCard)
+
     onClick = () => {
+      setIsButtonDisabled(true)
+      setCardClassName(`${styles.card} ${styles.cardDisabled}`)
+
       if (selectedAccount) {
         getRewardsWithReason(
           selectedAccount,
@@ -76,12 +84,12 @@ const CardList = ({ cardList }: { cardList: CardProps[] }) => {
   return (
     <>
       <div className={styles.cardListContainer}>
-        <Card className={styles.card}>
+        <Card className={cardClassName}>
           <div className={styles.cardDescription}>
             Lorem ipsum dolor sit amet,
           </div>
           <Button
-            disabled={buttonDisabled}
+            disabled={isButtonDisabled}
             onClick={onClick}
             className={styles.cardButton}
           >

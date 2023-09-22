@@ -9,12 +9,15 @@ export const useSendTransactionManifest = () => {
 
   return useCallback(
     () => ({
-      mintMemberCard: (accountAddress: string) =>
-        sendTransaction(transactionManifests.mintMemberCard(accountAddress)),
+      mintMemberCard: (accountAddress: string, message?: string) =>
+        sendTransaction(
+          transactionManifests.mintMemberCard(accountAddress),
+          message,
+        ),
       getRewardsWithReason: (
         accountAddress: string,
         amount: string,
-        reason: string,
+        reason: string | '',
         memberCardResourceAddress: string,
         memberCardId: string,
       ) =>
@@ -26,6 +29,7 @@ export const useSendTransactionManifest = () => {
             memberCardResourceAddress,
             memberCardId,
           ),
+          reason, // reason can be used as message
         ),
     }),
     [sendTransaction, transactionManifests],

@@ -82,7 +82,8 @@ function Member() {
     )
   }
 
-  const memberCard = hasMemberShip ? getMemberCard(accounts[0]) : undefined
+  console.log('User has membership!')
+  const memberCard = getMemberCard(accounts[0])
   const memberCardId = getMemberCardNonFungibleId(memberCard)
   const memberCardData = getMemberCardJsonData(memberCard)
 

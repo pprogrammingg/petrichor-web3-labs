@@ -18,3 +18,14 @@
 .cardButton {
   border-radius: 50px;
 }
+
+.cardDisabled {
+  background: rgba(
+    4,
+    49,
+    65,
+    0.4
+  ); /* Use rgba to add a grey tint with reduced opacity */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Add a subtle border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
