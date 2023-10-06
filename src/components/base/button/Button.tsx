@@ -1,26 +1,30 @@
-import React, { ReactNode, MouseEvent } from 'react'
-import styles from './button.module.css'
+import { ReactNode, MouseEvent } from 'react'
+import styles from './Button.module.css'
 
-interface ButtonProps {
-  children: ReactNode
-  disabled?: boolean
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  className?: string
-}
-
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   children,
-  disabled = false,
+  disabled,
+  icon = 'none',
   onClick,
   className = '',
+}: {
+  children: ReactNode
+  disabled?: boolean
+  icon?: 'external-link' | 'none'
+  onClick?: (ev: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void
+  className?: string
 }) => {
-  const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const iconClass = icon
+    ? { 'external-link': styles['external-link'], none: '' }[icon]
+    : ''
+
+  const handleOnClick = (
+    ev: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
     if (disabled || !onClick) return
-    onClick(event)
+    onClick(ev)
   }
-
-  const classes = `${styles.button} ${className}`
-
+  const classes = `${styles.button} ${iconClass} ${className}`
   return (
     <button disabled={disabled} className={classes} onClick={handleOnClick}>
       {children}

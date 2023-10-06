@@ -1,6 +1,4 @@
 import { ResourceAddresses } from '../config'
-import { NonFungibleResource } from '../transformers/addTokens'
-// import { NonFungibleResource } from '../transformers/addTokens'
 
 export const TransactionManifests = ({
   memberComponentAddress,

@@ -14,7 +14,6 @@ import {
 import { RadixProvider } from './radix/RadixProvider'
 import RootLayout from './components/rootLayout/RootLayout'
 import Member from './components/membership/Member'
-import CardList from './components/CardList/cardList'
 import Home from './components/home/Home'
 import ErrorPage from './components/errorPage/ErrorPage'
 import { config } from './config'
@@ -34,7 +33,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/member" element={<Member />} />
-      <Route path="/tasks" element={<CardList cardList={[]} />} />
+      {/* <Route path="/tasks" element={<TaskCard cardList={[]} />} /> */}
       <Route path="*" element={<ErrorPage />} />
     </Route>,
   ),

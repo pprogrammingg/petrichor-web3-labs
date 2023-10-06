@@ -1,0 +1,16 @@
+.card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  @media screen and (max-width: 1330px) {
+    .card {
+      grid-template-columns: 1fr;
+    }
+    .outer-card {
+      width: 33.375rem;
+    }
+  }
+  

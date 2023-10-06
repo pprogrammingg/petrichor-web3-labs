@@ -1,7 +1,7 @@
 {
-  "name": "petrichor-web3-labs",
+  "name": "mist3-loyalty",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,11 @@
     "format": " npx prettier --cache --write src"
   },
   "dependencies": {
-    "@radixdlt/radix-dapp-toolkit": "0.7.2-dev-rc3.1.1",
+    "@radixdlt/dapps-dropdown": "^0.2.1",
+    "@radixdlt/radix-dapp-toolkit": "1.1.1",
+    "@types/node": "20.4.8",
+    "@types/react": "18.2.19",
+    "@types/react-dom": "18.2.7",
     "bignumber.js": "^9.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

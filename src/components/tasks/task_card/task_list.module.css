@@ -1,0 +1,10 @@
+.taskGrid {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-auto-rows: 1fr;
+    grid-auto-flow: dense;
+}
+
+
+  

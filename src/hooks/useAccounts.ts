@@ -14,43 +14,35 @@ export type AccountWithTokens = Account &
     nonFungibleTokens: Record<string, NonFungibleResource[]>
   }
 
-/**
- * function returns a callback that processes an array of accounts. For each account,
- * it fetches aggregated data, transforms fungible tokens, and then transforms non-fungible tokens.
- * The result is an array of objects, each representing an account with its associated fungible
- * and non-fungible tokens.
- * @param stateApi
- * @returns
- */
 const useWithTokens = (stateApi: State) => {
   return useCallback(
     (accounts: Account[]) =>
       stateApi
         .getEntityDetailsVaultAggregated(
-          accounts.map((account) => account.address),
+          accounts.map((account) => account.address)
         )
         .then((data) =>
           Promise.all(
-            data.map((item, index) =>
-              transformFungibleTokens(item.fungible_resources, stateApi)
+            data.map((item) =>
+              transformFungibleTokens(item.fungible_resources)
                 .then((fungibleTokens) => ({
-                  ...accounts[index],
+                  ...accounts.find(
+                    (account) => account.address === item.address
+                  )!,
                   fungibleTokens,
                 }))
                 .then((values) =>
-                  transformNonFungibleTokens(
-                    item.non_fungible_resources,
-                    accounts[index].address,
-                    stateApi,
-                  ).then((nonFungibleTokens) => ({
-                    ...values,
-                    nonFungibleTokens,
-                  })),
-                ),
-            ),
-          ),
+                  transformNonFungibleTokens(item.non_fungible_resources).then(
+                    (nonFungibleTokens) => ({
+                      ...values,
+                      nonFungibleTokens,
+                    })
+                  )
+                )
+            )
+          )
         ),
-    [stateApi],
+    [stateApi]
   )
 }
 
@@ -71,20 +63,24 @@ export const useAccounts = () => {
         switchMap((accounts) => {
           setState((prev) => ({ ...prev, status: 'pending' }))
           return withTokens(accounts)
-            .then((accounts: any) => {
-              setState({ accounts, status: 'success', hasLoaded: true })
+            .then((accounts: any[]) => {
+              setState({
+                accounts,
+                status: 'success',
+                hasLoaded: true,
+              })
             })
             .catch(() => {
               setState({ accounts: [], status: 'error', hasLoaded: true })
             })
-        }),
+        })
       )
       .subscribe()
 
     return () => {
       subscription.unsubscribe()
     }
-  }, [dAppToolkit, withTokens])
+  }, [dAppToolkit, withTokens, setState])
 
   return {
     state,

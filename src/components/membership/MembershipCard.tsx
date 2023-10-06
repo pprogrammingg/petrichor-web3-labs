@@ -7,7 +7,7 @@ const MembershipCard = () => {
       <div className={styles.memberShipCardContent}>
         <div className={styles.topLeftText}>Rustasian</div>
         <div className={styles.bottomRightText}>
-          <div>Company Name</div>
+          <div>ISACA</div>
         </div>
       </div>
     </div>
