@@ -6,7 +6,6 @@
   background: var(--yellow);
   color: var(--blue);
   border-width: 0;
-  width: 100%;
   padding: 0.75rem;
   display: flex;
   align-items: center;
@@ -35,3 +34,30 @@
   opacity: 0.2;
   cursor: unset;
 }
+
+.mint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: orange; /* Orange rose color */
+  color: black; /* Bold black font */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  transition: background-color 0.1s ease-in-out; /* Transition effect */
+  font-weight: bold;
+}
+
+.mint:hover {
+  background: lightcoral; /* Lighter color on hover */
+}
+
+.task {
+  background-color: #ff6f61; /* Rose orange color */
+  transition: background-color 0.2s ease-in-out;
+  font-weight: bold;
+}
+
+.task:hover {
+  background-color: #ff8c78; /* Lighter version on hover */
+}
+

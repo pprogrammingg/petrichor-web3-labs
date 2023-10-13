@@ -24,7 +24,7 @@ export const Button = ({
     if (disabled || !onClick) return
     onClick(ev)
   }
-  const classes = `${styles.button} ${iconClass} ${className}`
+  const classes = `${styles.button} ${iconClass} ${styles[className]}`
   return (
     <button disabled={disabled} className={classes} onClick={handleOnClick}>
       {children}

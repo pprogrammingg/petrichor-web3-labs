@@ -17,6 +17,7 @@ import Member from './components/membership/Member'
 import Home from './components/home/Home'
 import ErrorPage from './components/errorPage/ErrorPage'
 import { config } from './config'
+import TaskList from './components/tasks/task_card/taskList'
 
 declare global {
   namespace JSX {
@@ -33,7 +34,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/member" element={<Member />} />
-      {/* <Route path="/tasks" element={<TaskCard cardList={[]} />} /> */}
+      <Route path="/tasks" element={<TaskList/>} />
       <Route path="*" element={<ErrorPage />} />
     </Route>,
   ),

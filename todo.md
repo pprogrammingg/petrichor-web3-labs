@@ -66,7 +66,7 @@ dapp/src/app/hooks/useAccounts.ts)
  [] Happy path tests
     [x] call DLT mint membershipcard
     [] try with sendTransaction({manifest, message}) 
-    [x] succcess received (member card minted), will show member profile section
+    [x] succcess received (member card minted), will show member profile section with member level and NFT data
 
 [x] Membership card a slick card object that looks like a bank card, it should be very slick as if implying the card is a shiny sheet of metal and has some sort of reflection coming out of it, the color of the card should be a red orange combination similar to parsimmon. 
 

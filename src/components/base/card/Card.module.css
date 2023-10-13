@@ -1,20 +1,32 @@
 .card {
+  padding: 1.5rem;
   border-radius: 8px;
   border: 1px solid var(--gray-200);
   background: var(--white);
-  height: 100%;
-  width: 100%;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 0 10px rgba(0, 0, 0, 0.1); /* Combined shadow effect */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.card-shadow {
-  padding: 1rem;
-  border-radius: 20px;
-  border: 1px solid #ecf1ff;
-  background: rgba(236, 241, 255, 0.5);
-  width: 100%;
+.task_card {
+  width: 224px; /* Width of a playing card */
+  height: 320px; /* Adjusted height for a playing card look */
+  background-color: #64c9eb; /* Light blue color */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 10px 10px 2px rgba(0, 0, 0, 0.1); /* Combined shadow effect */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
 }
+  
+@media screen and (max-width: 1330px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+  .outer-card {
+    width: 33.375rem;
+  }
+}
+  

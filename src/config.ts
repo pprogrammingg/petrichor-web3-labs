@@ -22,12 +22,12 @@ export const config = {
   dAppDefinitionAddress,
   addresses: {
     packageAddress:
-      'package_tdx_e_1p4n7x2vrt9zphy7u3agn8gl5ahkhjk68cu5u6u9zhg862pps4446j0',
+      'package_tdx_2_1p4ukk762enprf8hqelshn2mc7f4ht26s0d3uf0caet78r2w6ee2g6v',
     memberComponentAddress:
-      'component_tdx_e_1cppz3j4jr32z7ewskevakscv3m9p5vs869ke37ckzslmavtdazje7k',
+      'component_tdx_2_1cp2f9zz0gun8ggflgw0jy2jekpjx0uuv0lszt04s4d5cvr8kd586qx',
     memberCardResourceAddress: import.meta.env
       .VITE_MEMBERCARD_NFT_RESOURCE_ADDRESS,
     rewardTokenResourceAddress:
-      'resource_tdx_e_1t56uy7jazxhqcx9mlxv2vpulsy2mqqaqndnn29vj2nyv0tae60l5zw',
+      'resource_tdx_2_1t436578k9e2jcgccx3hu3kuyhun2fpnalfxmwh5jkkw8f7drmn8am2',
   },
 }

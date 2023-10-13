@@ -15,7 +15,7 @@ export const usePersona = () => {
         setState({ persona: state.persona, hasLoaded: true })
       }
     )
-
+    
     return () => {
       subscription.unsubscribe()
     }

@@ -12,43 +12,41 @@ import { Card } from '../../base/card'
 
 const TaskCard = ({
   accounts,
+  description,
   onSubmit,
   disableSendButton,
 } : {
-  accounts: WalletDataStateAccount[]
-  onSubmit: (selectedAccount: string) => void
+  accounts: WalletDataStateAccount[],
+  description: string,
+  onSubmit: () => void
   disableSendButton?: boolean
 }) => {
-  const [{ selectedAccount }, setState] = useState<{
-    selectedAccount?: string
-  }>({})
 
-  useEffect(() => {
-    if (selectedAccount) {
-      const selectedAccountExists = accounts.some(
-        (account) => account.address === selectedAccount
-      )
-      if (!selectedAccountExists) setState({ selectedAccount: undefined })
+  const [isCompleted, setIsCompleted] = useState(false); // State to track completion status
+  const isButtonDisabled = accounts.length === 0 || isCompleted;
+
+  const handleButtonClick = async () => {
+    // Call the onSubmit function and handle completion logic here
+    try {
+      await onSubmit();
+      setIsCompleted(true); // Mark the task as completed
+    } catch (error) {
+      console.error(error);
     }
-  }, [selectedAccount, accounts])
+  };
 
-  const isButtonDisabled = !selectedAccount || accounts.length === 0
-
+  console.log(`isButtonDisabled ${isButtonDisabled}`)
   return (
-    <Card className={styles.card} outerClassName={styles['outer-card']}>
+    <Card className="task_card">
       <div className={styles.cardDescription}>
-        This is a description
+        {description}
       </div>
-    <Button
-      icon="external-link"
-      disabled={isButtonDisabled || disableSendButton}
-      onClick={() => {
-        if (selectedAccount) {
-          onSubmit(selectedAccount)
-        }
-      }}
-    >
-        Send to the Radix Wallet
+      <Button
+        disabled={isButtonDisabled || disableSendButton}
+        onClick={handleButtonClick}
+        className="task"
+      >
+          {isCompleted ? 'Claimed' : 'Complete'}
       </Button>
   </Card>
   )

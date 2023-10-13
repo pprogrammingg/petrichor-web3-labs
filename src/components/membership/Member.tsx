@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import {
   getMemberCard,
-  getMemberCardJsonData,
   getMemberCardNonFungibleId,
+  getNftData,
   hasMemberCard,
 } from '../../helpers/memberUtils'
 import { useAccounts } from '../../hooks/useAccounts'
@@ -27,6 +28,9 @@ import styles from './member.module.css'
  */
 function Member() {
   console.log('rendering member')
+
+  const [memberLevel, setMemberLevel] = useState(null);
+  const [memberSinceLocal, setMemberSinceLocal] = useState("null");
   // const connectButtonState =
   useConnectButtonState()
 
@@ -52,7 +56,11 @@ function Member() {
   // console.log(`hasPersonaLoaded : ${hasPersonaLoaded} `)
 
   if (isLoading) {
-    return null
+    return (
+      <>
+          <h3>Connect to an account to reveal tasks!</h3>
+      </>
+    )
   }
 
   console.log('Loading is complete')
@@ -67,13 +75,14 @@ function Member() {
     return (
       <div className={styles.containerGrid}>
         <div className={styles.mintButtonContainer}>
-          <p>Mint your membershipcard first!</p>
+          <h3>Mint your membershipcard first!</h3>
           <Button
             onClick={() => {
               if (selectedAccount) {
                 mintMemberCard(selectedAccount).map(refresh)
               }
             }}
+            className='mint'
           >
             Mint NFT
           </Button>
@@ -85,32 +94,55 @@ function Member() {
   console.log('User has membership!')
   const memberCard = getMemberCard(accounts[0])
   const memberCardId = getMemberCardNonFungibleId(memberCard)
-  const memberCardData = getMemberCardJsonData(memberCard)
 
-  const memberLevel = memberCardData?.level?.value
-  const memberSinceUnixEpoch = memberCardData?.join_date_time?.value
-  const memberSinceUTC = new Date(memberSinceUnixEpoch * 1000)
+  getNftData(memberCardId)
+    .then((result: Record<string, any>) => {
+      console.log(`memberCardData inside Member.tsx ${JSON.stringify(result, null, 2)}`)
+      const level = result?.level?.value 
+      const memberSinceUnixEpoch = result?.join_date_time?.value
+      const memberSinceUTC = new Date(memberSinceUnixEpoch * 1000)
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+    
+      const localDateString = memberSinceUTC?.toLocaleDateString(undefined, options)
 
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }
-
-  const memberSinceLocal = memberSinceUTC.toLocaleDateString(undefined, options)
+      setMemberLevel(level);
+      setMemberSinceLocal(localDateString);
+    })
+    .catch(() => {
+      console.log("unable to extract member card data!")
+    })
 
   return (
     <>
-      {hasMemberShip && (
+      {
+      hasMemberShip && (
         <div className={styles.containerGrid}>
           <h1 className="memberPageHeading">Welcome Member!</h1>
           <div className={styles.memberCardContainer}>
             <MembershipCard></MembershipCard>
           </div>
           <div className={styles.memberCardInfo}>
-            <p> Member joined on: {memberSinceLocal} </p>
-            <p> Member Level : {memberLevel} </p>
+            {
+              (memberLevel && memberSinceLocal)?
+              (
+                <>
+                  <p> Member joined on: {memberSinceLocal} </p>
+                  <p> Member Level : {memberLevel} </p>
+                </> 
+              ):
+              (
+                <>
+                  <p> Failed to retrieve member level and joined date</p>
+                </>
+              )
+
+            }
+
             <p> Member Card ID: {memberCardId} </p>
           </div>
         </div>
