@@ -53,7 +53,7 @@ const TaskList = ({
     console.log('Fungible Token Amount:', rewardAmount);
     }
 
-    let hasLargeAmount = parseInt(rewardAmount) > 500;
+    let hasLargeAmount = parseInt(rewardAmount) > 50;
     console.log(`hasLargeAmount ${hasLargeAmount}`)
     
     return(
@@ -76,14 +76,11 @@ const TaskList = ({
                                         ).map(refresh)
                                     }}
                             />
-        
-
                 )}
                 {hasMemberShip && hasLargeAmount && (
-
                             <TaskCard 
                                 accounts={accounts}
-                                description="As a token of our appreciation, please complete to get 50 additional points."
+                                description="As a token of our appreciation, complete bonus task to EARN additional 50 additional points."
                                 disableSendButton={isConnectButtonPending}
                                 onSubmit={() => {
                                     getRewardsWithReason(

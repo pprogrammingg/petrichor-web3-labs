@@ -2,6 +2,8 @@
   font-weight: bold;
   padding: 15px 0; /* Padding around the description */
   text-align: left; /* Left-justify the text */
+  color: #000000; /* Black text color */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
 }
 
   

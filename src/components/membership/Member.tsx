@@ -84,7 +84,7 @@ function Member() {
             }}
             className='mint'
           >
-            Mint NFT
+            Mint Membership Card
           </Button>
         </div>
       </div>

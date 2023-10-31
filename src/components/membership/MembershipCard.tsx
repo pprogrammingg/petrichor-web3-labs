@@ -5,9 +5,9 @@ const MembershipCard = () => {
   return (
     <div className={styles.membershipCard}>
       <div className={styles.memberShipCardContent}>
-        <div className={styles.topLeftText}>Rustasian</div>
+        <div className={styles.topLeftText}>SENECA COLLEGE</div>
         <div className={styles.bottomRightText}>
-          <div>ISACA</div>
+          <div>Rustasian</div>
         </div>
       </div>
     </div>
